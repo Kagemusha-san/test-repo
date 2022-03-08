@@ -1,0 +1,5585 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Explore Backend Services",
+    "version": "v1"
+  },
+  "paths": {
+    "/api/analyses/current-user": {
+      "get": {
+        "tags": [
+          "Analysis"
+        ],
+        "summary": "Get a list of analyses for the authorized user. Required roles: xpl-property-analytics-execute",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Analysis"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/analyses/{id}": {
+      "get": {
+        "tags": [
+          "Analysis"
+        ],
+        "summary": "Get an analysis by identifier. Required roles: xpl-property-analytics-execute",
+        "description": "An authorized user may only request its own analyses.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Identifier",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Analysis"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Analysis"
+        ],
+        "summary": "Update an analysis by identifier. Required roles: xpl-property-analytics-modify",
+        "description": "An authorized user may only update its own analyses.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Identifier",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Analysis to be updated",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Analysis"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Analysis"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Analysis"
+        ],
+        "summary": "Delete an analysis by identifier. Required roles: xpl-property-analytics-modify",
+        "description": "An authorized user may only delete its own analyses.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Identifier",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Analysis"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/analyses": {
+      "post": {
+        "tags": [
+          "Analysis"
+        ],
+        "summary": "Create a new analysis. Required roles: xpl-property-analytics-modify",
+        "requestBody": {
+          "description": "Analysis to be created",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Analysis"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Analysis"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/data-buckets/current-user": {
+      "get": {
+        "tags": [
+          "DataBucket"
+        ],
+        "summary": "Get a list of data buckets for the authorized user. Required roles: xpl-data-bucket-execute",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/DataBucket"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/data-buckets/{id}": {
+      "get": {
+        "tags": [
+          "DataBucket"
+        ],
+        "summary": "Get a data bucket by identifier. Required roles: xpl-data-bucket-execute",
+        "description": "An authorized user may only request its own data buckets.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Identifier",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DataBucket"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "DataBucket"
+        ],
+        "summary": "Update a data bucket by identifier. Required roles: xpl-data-bucket-modify",
+        "description": "An authorized user may only update its own data buckets.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Identifier",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Data bucket to be updated",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DataBucket"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DataBucket"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "DataBucket"
+        ],
+        "summary": "Delete a data bucket by identifier. Required roles: xpl-data-bucket-modify",
+        "description": "An authorized user may only delete its own data buckets.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Identifier",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DataBucket"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/data-buckets": {
+      "post": {
+        "tags": [
+          "DataBucket"
+        ],
+        "summary": "Create a new data bucket. Required roles: xpl-data-bucket-modify",
+        "requestBody": {
+          "description": "Data bucket to be created",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DataBucket"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DataBucket"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/configuration/entities": {
+      "get": {
+        "tags": [
+          "Configuration"
+        ],
+        "summary": "Get a list of configurations for all entities. Required roles: xpl-frontend-base-execute",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EntityConfiguration"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Configuration"
+        ],
+        "summary": "Get entity configurations for provided labels. Required roles: xpl-frontend-base-execute",
+        "requestBody": {
+          "description": "Labels to get configurations for",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LabelsRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LabelsRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/LabelsRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EntityConfiguration"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/files/{id}": {
+      "get": {
+        "tags": [
+          "File"
+        ],
+        "summary": "Get binary data of a file by identifier. Required roles: xpl-gbs-filestorage-execute",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Identifier",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "inline",
+            "in": "query",
+            "description": "Whether to set Content-Disposition header to inline or not",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "File"
+        ],
+        "summary": "Delete a file by identifier. Required roles: xpl-gbs-filestorage-modify",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Identifier",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/File"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/files": {
+      "get": {
+        "tags": [
+          "File"
+        ],
+        "summary": "Get a list of files based on the file type. Required roles: xpl-gbs-filestorage-execute",
+        "description": "Only returns metadata, no binary data.",
+        "parameters": [
+          {
+            "name": "fileType",
+            "in": "query",
+            "description": "File type to filter for",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/File"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "File"
+        ],
+        "summary": "Upload a single or multiple files. Required roles: xpl-gbs-filestorage-modify",
+        "responses": {
+          "201": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/File"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/files/file": {
+      "get": {
+        "tags": [
+          "File"
+        ],
+        "summary": "Get binary data of a file by file name and file type. Required roles: xpl-gbs-filestorage-execute",
+        "parameters": [
+          {
+            "name": "fileName",
+            "in": "query",
+            "description": "Name of the file",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fileType",
+            "in": "query",
+            "description": "File type",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "inline",
+            "in": "query",
+            "description": "Whether to set Content-Disposition header to inline or not",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/files/full-names/{fullFileName}": {
+      "get": {
+        "tags": [
+          "File"
+        ],
+        "summary": "Get binary data of a file by full file name. Required roles: xpl-gbs-filestorage-execute",
+        "description": "Can be called with either a signed URL or Bearer token. Parameters 'expires' and 'signature' are only required for\r\nsigned URLs.",
+        "parameters": [
+          {
+            "name": "fullFileName",
+            "in": "path",
+            "description": "The full filename (file-name.file-type)",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "inline",
+            "in": "query",
+            "description": "Whether to set Content-Disposition header to inline or not",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          },
+          {
+            "name": "expires",
+            "in": "query",
+            "description": "Expiration of a signed URL",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "signature",
+            "in": "query",
+            "description": "Signature of a signed URL",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      },
+      "head": {
+        "tags": [
+          "File"
+        ],
+        "summary": "Get binary data of a file by full file name. Required roles: xpl-gbs-filestorage-execute",
+        "description": "Can be called with either a signed URL or Bearer token. Parameters 'expires' and 'signature' are only required for\r\nsigned URLs.",
+        "parameters": [
+          {
+            "name": "fullFileName",
+            "in": "path",
+            "description": "The full filename (file-name.file-type)",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "inline",
+            "in": "query",
+            "description": "Whether to set Content-Disposition header to inline or not",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          },
+          {
+            "name": "expires",
+            "in": "query",
+            "description": "Expiration of a signed URL",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "signature",
+            "in": "query",
+            "description": "Signature of a signed URL",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/graph/query/cypher": {
+      "post": {
+        "tags": [
+          "Graph"
+        ],
+        "summary": "Execute a cypher query. Required roles: xpl-gbs-base-execute, xpl-scope-execute (if scope is provided)",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "query",
+            "description": "NodeId of a node the result should be filtered by",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Cypher query and optional parameters",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RunCypherQuery"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/IRecord"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/graph/query/edges": {
+      "post": {
+        "tags": [
+          "Graph"
+        ],
+        "summary": "Get a list of edges based on the in- and outgoing relationships to neighbors. Required roles: xpl-gbs-base-execute,\r\nxpl-scope-execute (if scope is provided)",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "query",
+            "description": "NodeId of a node the result should be filtered by",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "NodeIds to get edges for",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NodeIdsRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Edge"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/graph/query/edge-labels": {
+      "get": {
+        "tags": [
+          "Graph"
+        ],
+        "summary": "Get a list of all existing edge labels. Required roles: xpl-gbs-base-execute",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/graph/query/viewpoints": {
+      "get": {
+        "tags": [
+          "Graph"
+        ],
+        "summary": "Get a list of all defined viewpoints. Required roles: xpl-view-points-execute",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ViewPoint"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/graph/query/viewpoints/{id}": {
+      "get": {
+        "tags": [
+          "Graph"
+        ],
+        "summary": "Get nodes based on the definition of the provided viewpoint identifier. Required roles: xpl-view-points-execute,\r\nxpl-scope-execute (if scope is provided)",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Identifier of a viewpoint that should be applied",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "scope",
+            "in": "query",
+            "description": "NodeId of a node the result should be filtered by",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/NavigationNode"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/graph/query/sub-graph": {
+      "get": {
+        "tags": [
+          "Graph"
+        ],
+        "summary": "Get the sub graph of a node. Required roles: xpl-gbs-base-execute, xpl-scope-execute (if scope is provided)",
+        "description": "The sub graph only considers primary (hierarchical) relationships. If a node would be part\r\nof the sub graph but it's relationship is not defined to be hierarchical, the node is ignored.",
+        "parameters": [
+          {
+            "name": "nodeId",
+            "in": "query",
+            "description": "NodeId of a node the sub graph should be returned for",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "scope",
+            "in": "query",
+            "description": "NodeId of a node the result should be filtered by",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/NavigationNode"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/graph/query/shortest-path": {
+      "post": {
+        "tags": [
+          "Graph"
+        ],
+        "summary": "Find the shortest path between at least two nodes. Required roles: xpl-gbs-base-execute, xpl-scope-execute (if\r\nscope is provided)",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "query",
+            "description": "NodeId of a node the result should be filtered by",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "NodeIds to find the shortest path for",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NodeIdsRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ShortestPath"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/graph/query/nodes": {
+      "post": {
+        "tags": [
+          "Graph"
+        ],
+        "summary": "Get one or more nodes with metadata. Required roles: xpl-gbs-base-execute, xpl-scope-execute (if scope is provided)",
+        "description": "Metadata can be configured in the request where 'includeAllMetadata' overrules all other configuration flags.\r\nIf 'includeAllMetadata' is set to true, all metadata is returned regardless of other configuration parameters\r\nbeing set to false.",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "query",
+            "description": "NodeId of a node the result should be filtered by",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "NodeIds to be retrieved and configuration of which metadata to include",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FullNodeRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/FullNode"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/instant-3d-hub/geometries": {
+      "post": {
+        "tags": [
+          "Instant3DHub"
+        ],
+        "summary": "Get a dictionary of geometry file links and corresponding transformations.",
+        "description": "While geometry files are only considered for the provided nodeIds, transformations are taken\r\nfrom directly related nodes. Geometry file links pointing to EXPLORE's file storage are\r\nreturned as signed URLs.",
+        "requestBody": {
+          "description": "NodeIds to get geometry for",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NodeIdsRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/instant-3d-hub/configuration": {
+      "get": {
+        "tags": [
+          "Instant3DHub"
+        ],
+        "summary": "Get instant3Dhub related configurations.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/integrations/actions": {
+      "post": {
+        "tags": [
+          "Integration"
+        ],
+        "summary": "Get a list of integration actions for provided labels. The \"Script\" of an action can only be retrieved by calling\r\n/api/integrations/actions/{id} endpoint for a specific action. Required roles: xpl-gbs-integrations-execute",
+        "parameters": [
+          {
+            "name": "runtimeType",
+            "in": "query",
+            "description": "If present, only return actions for provided type. Supported types: JavaScript, Python",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Labels to get actions for",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LabelsRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/IntegrationAction"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/integrations/actions/{id}": {
+      "post": {
+        "tags": [
+          "Integration"
+        ],
+        "summary": "Get an action where placeholders in \"Script\" are replaced by values based on provided nodeIds. Required roles:\r\nxpl-gbs-integrations-execute, xpl-scope-execute (if scope is provided)",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Action Id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "scope",
+            "in": "query",
+            "description": "NodeId of a node the result should be filtered by",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "NodeIds based on which values for script placeholders are determined",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NodeIdsRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IntegrationAction"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/interop-templates": {
+      "get": {
+        "tags": [
+          "InteropTemplate"
+        ],
+        "summary": "Get a list of all available interop templates. Required roles: xpl-interop-templates-execute",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/InteropTemplate"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/interop-templates/validate": {
+      "get": {
+        "tags": [
+          "InteropTemplate"
+        ],
+        "summary": "Validate a data bucket against it's interop template. Required roles: xpl-interop-templates-execute",
+        "description": "If no interop template is attached, validation is successful. Otherwise it is verified that\r\na data bucket contains all labels defined in the attached interop template. If validation\r\nfails, missing labels are returned in the response.",
+        "parameters": [
+          {
+            "name": "dataBucketId",
+            "in": "query",
+            "description": "Data bucket identifier",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InteropTemplateValidationResult"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/interop-templates/export": {
+      "get": {
+        "tags": [
+          "InteropTemplate"
+        ],
+        "summary": "Export nodes and properties of a data bucket according to it's interop template. Required roles:\r\nxpl-interop-templates-execute",
+        "parameters": [
+          {
+            "name": "dataBucketId",
+            "in": "query",
+            "description": "Data bucket identifier",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Node"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/label-filters/current-user": {
+      "get": {
+        "tags": [
+          "LabelFilter"
+        ],
+        "summary": "Get a list of label filters for the authorized user. Required roles: xpl-frontend-base-execute",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/LabelFilter"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/label-filters/{id}": {
+      "get": {
+        "tags": [
+          "LabelFilter"
+        ],
+        "summary": "Get a label filter by identifier. Required roles: xpl-frontend-base-execute",
+        "description": "An authorized user may only request its own analyses.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Identifier",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LabelFilter"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "LabelFilter"
+        ],
+        "summary": "Update a label filter by identifier. Required roles: xpl-frontend-base-execute",
+        "description": "An authorized user may only update its own label filter.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Identifier",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Label filter to be updated",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LabelFilter"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LabelFilter"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "LabelFilter"
+        ],
+        "summary": "Delete a label filter by identifier. Required roles: xpl-frontend-base-execute",
+        "description": "An authorized user may only delete its own label filter.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Identifier",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LabelFilter"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/label-filters": {
+      "post": {
+        "tags": [
+          "LabelFilter"
+        ],
+        "summary": "Create a new label filter. Required roles: xpl-frontend-base-execute",
+        "requestBody": {
+          "description": "Label filter to be created",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LabelFilter"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LabelFilter"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/license/licensed-modules": {
+      "get": {
+        "tags": [
+          "License"
+        ],
+        "summary": "Returns a list of all licensed modules and their support type.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/LicensedModule"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/membership/authenticate": {
+      "post": {
+        "tags": [
+          "Membership"
+        ],
+        "summary": "Authenticate a user or client.",
+        "requestBody": {
+          "description": "Credentials",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AuthenticationModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AuthenticationModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AuthenticationModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthenticationStatus"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/membership/validate": {
+      "post": {
+        "tags": [
+          "Membership"
+        ],
+        "summary": "Verify validity of an access token.",
+        "requestBody": {
+          "description": "Access token",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TokenRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/membership/refresh": {
+      "post": {
+        "tags": [
+          "Membership"
+        ],
+        "summary": "Get a new access token by using a refresh token.",
+        "requestBody": {
+          "description": "Refresh token",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TokenRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthenticationStatus"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/membership/signed-urls": {
+      "post": {
+        "tags": [
+          "Membership"
+        ],
+        "summary": "Create signed URLs. Required roles: xpl-gbs-filestorage-modify",
+        "description": "Only URLs pointing to EXPLORE's file storage will be signed. All other URLs\r\nwill be returned as is.",
+        "requestBody": {
+          "description": "URLs to be signed",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/graph/navigation/scopes": {
+      "get": {
+        "tags": [
+          "Graph"
+        ],
+        "summary": "Get a list of all defined scopes. Required roles: xpl-scope-execute",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Scope"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/graph/navigation/nodes": {
+      "post": {
+        "tags": [
+          "Graph"
+        ],
+        "summary": "Get one or more nodes. Required roles: xpl-gbs-base-execute, xpl-scope-execute (if scope is provided)",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "query",
+            "description": "NodeId of a node the result should be filtered by",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "NodeIds to be retrieved",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NodeIdsRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NodeIdsRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/NodeIdsRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/NavigationNode"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/configuration/nodes": {
+      "get": {
+        "tags": [
+          "Configuration"
+        ],
+        "summary": "Get node settings for all entities. Required roles: xpl-frontend-base-execute",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/NodeSetting"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/configuration/properties/{propertyName}": {
+      "get": {
+        "tags": [
+          "Configuration"
+        ],
+        "summary": "Get a property's configuration. Required roles: xpl-frontend-base-execute",
+        "parameters": [
+          {
+            "name": "propertyName",
+            "in": "path",
+            "description": "Property name",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PropertyConfiguration"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/configuration/properties": {
+      "get": {
+        "tags": [
+          "Configuration"
+        ],
+        "summary": "Get the configuration of all available properties. Required roles: xpl-frontend-base-execute",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PropertyConfiguration"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/property-filters/current-user": {
+      "get": {
+        "tags": [
+          "PropertyFilter"
+        ],
+        "summary": "Get a list of property filters for the authorized user. Required roles: xpl-frontend-base-execute",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PropertyFilter"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/property-filters/{id}": {
+      "get": {
+        "tags": [
+          "PropertyFilter"
+        ],
+        "summary": "Get a property filter by identifier. Required roles: xpl-frontend-base-execute",
+        "description": "An authorized user may only request its own analyses.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Identifier",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PropertyFilter"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "PropertyFilter"
+        ],
+        "summary": "Update a property filter by identifier. Required roles: xpl-frontend-base-execute",
+        "description": "An authorized user may only update its own property filter.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Identifier",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "property filter to be updated",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PropertyFilter"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PropertyFilter"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "PropertyFilter"
+        ],
+        "summary": "Delete a property filter by identifier. Required roles: xpl-frontend-base-execute",
+        "description": "An authorized user may only delete its own property filter.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Identifier",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PropertyFilter"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/property-filters": {
+      "post": {
+        "tags": [
+          "PropertyFilter"
+        ],
+        "summary": "Create a new property filter. Required roles: xpl-frontend-base-execute",
+        "requestBody": {
+          "description": "property filter to be created",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PropertyFilter"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PropertyFilter"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/configuration/property-groups": {
+      "get": {
+        "tags": [
+          "Configuration"
+        ],
+        "summary": "Get a list of property groups and it's properties by label (entity name). Required roles: xpl-frontend-base-execute",
+        "parameters": [
+          {
+            "name": "label",
+            "in": "query",
+            "description": "Label (entity name)",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PropertyGroup"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/graph/query/related-nodes": {
+      "post": {
+        "tags": [
+          "Graph"
+        ],
+        "summary": "Get a list of related nodes. Required roles: xpl-gbs-base-execute, xpl-scope-execute (if scope is provided)",
+        "description": "Related nodes are considered to a depth defined by the provided 'limit'. Intermediate nodes\r\nthat are defined as group nodes, are ignored.",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "query",
+            "description": "NodeId of a node the result should be filtered by",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Define depth limit, labels and nodeIds to find related nodes for",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RelatedNodesRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/NavigationNode"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/graph/query/related-nodes/count-per-label": {
+      "post": {
+        "tags": [
+          "Graph"
+        ],
+        "summary": "Get a list of labels and a count of related nodes per label. Required roles: xpl-gbs-base-execute,\r\nxpl-scope-execute (if scope is provided)",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "query",
+            "description": "NodeId of a node the result should be filtered by",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Define depth limit and nodeIds to count related nodes for",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RelatedNodesCountRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/RelatedNodesCount"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/graph/query/related-nodes/successors-same-label": {
+      "post": {
+        "tags": [
+          "Graph"
+        ],
+        "summary": "Get a list of successor nodes having the same label as the provided nodes. Required roles: xpl-gbs-base-execute,\r\nxpl-scope-execute (if scope is provided)",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "query",
+            "description": "NodeId of a node the result should be filtered by",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "NodeIds successors with same labels should be returned for",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NodeIdsRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/NavigationNode"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/graph/query/related-nodes/successors-same-label-count": {
+      "post": {
+        "tags": [
+          "Graph"
+        ],
+        "summary": "Get a count of successor nodes having the same label as the provided nodes. Required roles: xpl-gbs-base-execute,\r\nxpl-scope-execute (if scope is provided)",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "query",
+            "description": "NodeId of a node the result should be filtered by",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "NodeIds a count of successors with same labels should be returned for",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NodeIdsRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int64"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/graph/query/related-nodes/distance-per-label": {
+      "post": {
+        "tags": [
+          "Graph"
+        ],
+        "summary": "Get a dictionary of nodeIds with distances to each provided label. If no related nodes are found for a label within\r\nthe provided limit, -1 is returned. Required roles: xpl-frontend-base-execute, xpl-scope-execute (if scope is\r\nprovided)",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "query",
+            "description": "NodeId of a node the result should be filtered by",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Define depth limit, labels and nodeIds to calculate distances for",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RelatedNodesDistanceRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "integer",
+                      "format": "int32"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sandboxes/current-user": {
+      "get": {
+        "tags": [
+          "Sandbox"
+        ],
+        "summary": "Get a list of sandboxes for the authorized user. Required roles: xpl-sandbox-execute",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Sandbox"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sandboxes/{id}": {
+      "get": {
+        "tags": [
+          "Sandbox"
+        ],
+        "summary": "Get a sandbox by identifier. Required roles: xpl-sandbox-execute",
+        "description": "An authorized user may only request its own sandboxes.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Identifier",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Sandbox"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Sandbox"
+        ],
+        "summary": "Update a sandbox by identifier. Required roles: xpl-sandbox-modify",
+        "description": "An authorized user may only update its own sandboxes.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Identifier",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Sandbox to be updated",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Sandbox"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Sandbox"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Sandbox"
+        ],
+        "summary": "Delete a sandbox by identifier. Required roles: xpl-sandbox-modify",
+        "description": "An authorized user may only delete its own sandboxes.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Identifier",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Sandbox"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sandboxes": {
+      "post": {
+        "tags": [
+          "Sandbox"
+        ],
+        "summary": "Create a new sandbox. Required roles: xpl-sandbox-modify",
+        "requestBody": {
+          "description": "Sandbox to be created",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Sandbox"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Sandbox"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/graph/search/advanced-search": {
+      "post": {
+        "tags": [
+          "Graph"
+        ],
+        "summary": "Search for nodes. Required roles: xpl-gbs-base-execute, xpl-scope-execute (if scope is provided)",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "query",
+            "description": "NodeId of a node the result should be filtered by",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Define search parameters",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SearchConfiguration"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Node"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sessions/current-user": {
+      "get": {
+        "tags": [
+          "Session"
+        ],
+        "summary": "Get a list of sessions for the authorized user. Required roles: xpl-session-execute",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Session"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sessions/{id}": {
+      "get": {
+        "tags": [
+          "Session"
+        ],
+        "summary": "Get a session by identifier. Required roles: xpl-session-execute",
+        "description": "An authorized user may only request its own sessions.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Identifier",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Session"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Session"
+        ],
+        "summary": "Update a session by identifier. Required roles: xpl-session-modify",
+        "description": "An authorized user may only update its own sessions.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Identifier",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Session to be updated",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Session"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Session"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Session"
+        ],
+        "summary": "Delete a session by identifier. Required roles: xpl-session-modify",
+        "description": "An authorized user may only delete its own sessions.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Identifier",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Session"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sessions": {
+      "post": {
+        "tags": [
+          "Session"
+        ],
+        "summary": "Create a new session. Required roles: xpl-session-modify",
+        "requestBody": {
+          "description": "Session to be created",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Session"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Session"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/system/version": {
+      "get": {
+        "tags": [
+          "System"
+        ],
+        "summary": "Get the version of this service.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/themes/active": {
+      "get": {
+        "tags": [
+          "Theme"
+        ],
+        "summary": "Returns the active theme. Required roles: xpl-frontend-base-execute",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Theme"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/themes": {
+      "get": {
+        "tags": [
+          "Theme"
+        ],
+        "summary": "Returns a list of all available themes. The 'Configuration' of a theme can only be retrieved by calling\r\n/api/themes/{id} for a specific theme. Required roles: xpl-frontend-base-execute",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Theme"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/themes/{id}": {
+      "get": {
+        "tags": [
+          "Theme"
+        ],
+        "summary": "Get a theme by identifier. Required roles: xpl-frontend-base-execute",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Theme"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Analysis": {
+        "required": [
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32",
+            "example": 0
+          },
+          "sysInserted": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true,
+            "example": "2021-08-17T11:16:39.684Z"
+          },
+          "sysUpdated": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true,
+            "example": "2021-08-17T11:16:39.684Z"
+          },
+          "sysInsertedUser": {
+            "type": "string",
+            "nullable": true,
+            "example": "User"
+          },
+          "sysUpdatedUser": {
+            "type": "string",
+            "nullable": true,
+            "example": "User"
+          },
+          "state": {
+            "type": "string",
+            "nullable": true,
+            "example": "State example"
+          },
+          "name": {
+            "type": "string",
+            "example": "Analysis"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Artifact": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32",
+            "example": 0
+          },
+          "name": {
+            "type": "string",
+            "nullable": true,
+            "example": "ArtSample_1_Export"
+          },
+          "value": {
+            "type": "string",
+            "nullable": true,
+            "example": "http://localhost/api/files/full-names/ArtSample_1_Export.jt"
+          },
+          "type": {
+            "type": "string",
+            "nullable": true,
+            "example": "GeometryFile"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AuthenticationModel": {
+        "required": [
+          "password",
+          "type",
+          "username"
+        ],
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string",
+            "example": "User"
+          },
+          "password": {
+            "type": "string",
+            "example": "Password"
+          },
+          "type": {
+            "pattern": "[Cc]lient|[Uu]ser",
+            "type": "string",
+            "example": "user"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AuthenticationStatus": {
+        "type": "object",
+        "properties": {
+          "accessToken": {
+            "type": "string",
+            "nullable": true
+          },
+          "refreshToken": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "DataBucket": {
+        "required": [
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32",
+            "example": 0
+          },
+          "sysInserted": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true,
+            "example": "2021-08-17T11:16:39.684Z"
+          },
+          "sysUpdated": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true,
+            "example": "2021-08-17T11:16:39.684Z"
+          },
+          "sysInsertedUser": {
+            "type": "string",
+            "nullable": true,
+            "example": "User"
+          },
+          "sysUpdatedUser": {
+            "type": "string",
+            "nullable": true,
+            "example": "User"
+          },
+          "state": {
+            "type": "string",
+            "nullable": true,
+            "example": "State example"
+          },
+          "name": {
+            "type": "string",
+            "example": "Data Bucket"
+          },
+          "interopTemplateId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true,
+            "example": 0
+          },
+          "interopTemplate": {
+            "$ref": "#/components/schemas/InteropTemplate"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Edge": {
+        "type": "object",
+        "properties": {
+          "label": {
+            "type": "string",
+            "nullable": true,
+            "example": "CONTAINS"
+          },
+          "startNodeId": {
+            "type": "string",
+            "nullable": true,
+            "example": "\\project\\1"
+          },
+          "endNodeId": {
+            "type": "string",
+            "nullable": true,
+            "example": "\\document\\2"
+          }
+        },
+        "additionalProperties": false
+      },
+      "EntityConfiguration": {
+        "type": "object",
+        "properties": {
+          "entityName": {
+            "type": "string",
+            "nullable": true,
+            "example": "project"
+          },
+          "properties": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true,
+            "example": [
+              "year",
+              "budget"
+            ]
+          },
+          "readOnlyProperties": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true,
+            "example": [
+              "year",
+              "budget"
+            ]
+          },
+          "editableProperties": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true,
+            "example": [
+              "year",
+              "budget"
+            ]
+          },
+          "allowSandboxing": {
+            "type": "boolean",
+            "example": true
+          },
+          "isGeneric": {
+            "type": "boolean",
+            "example": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "File": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32",
+            "example": 0
+          },
+          "sysInserted": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true,
+            "example": "2021-08-17T11:16:39.684Z"
+          },
+          "sysUpdated": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true,
+            "example": "2021-08-17T11:16:39.684Z"
+          },
+          "sysInsertedUser": {
+            "type": "string",
+            "nullable": true,
+            "example": "User"
+          },
+          "sysUpdatedUser": {
+            "type": "string",
+            "nullable": true,
+            "example": "User"
+          },
+          "fileName": {
+            "type": "string",
+            "nullable": true,
+            "example": "test"
+          },
+          "fileType": {
+            "type": "string",
+            "nullable": true,
+            "example": "txt"
+          }
+        },
+        "additionalProperties": false
+      },
+      "FullNode": {
+        "type": "object",
+        "properties": {
+          "nodeId": {
+            "type": "string",
+            "nullable": true,
+            "example": "\\project\\1"
+          },
+          "labels": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true,
+            "example": [
+              "project",
+              "document"
+            ]
+          },
+          "properties": {
+            "type": "object",
+            "additionalProperties": { },
+            "nullable": true,
+            "example": {
+              "year": "2021",
+              "budget": "42000"
+            }
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/Metadata"
+          }
+        },
+        "additionalProperties": false
+      },
+      "FullNodeRequest": {
+        "required": [
+          "nodeIds"
+        ],
+        "type": "object",
+        "properties": {
+          "nodeIds": {
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "example": [
+              "\\project\\1",
+              "\\document\\2"
+            ]
+          },
+          "metadataConfig": {
+            "$ref": "#/components/schemas/MetadataConfig"
+          }
+        },
+        "additionalProperties": false
+      },
+      "IntegrationAction": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "script": {
+            "type": "string",
+            "nullable": true
+          },
+          "returnType": {
+            "type": "string",
+            "nullable": true
+          },
+          "runtimeType": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "InteropTemplate": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32",
+            "example": 0
+          },
+          "sysInserted": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true,
+            "example": "2021-08-17T11:16:39.684Z"
+          },
+          "sysUpdated": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true,
+            "example": "2021-08-17T11:16:39.684Z"
+          },
+          "sysInsertedUser": {
+            "type": "string",
+            "nullable": true,
+            "example": "User"
+          },
+          "sysUpdatedUser": {
+            "type": "string",
+            "nullable": true,
+            "example": "User"
+          },
+          "title": {
+            "type": "string",
+            "nullable": true,
+            "example": "Application export"
+          },
+          "description": {
+            "type": "string",
+            "nullable": true,
+            "example": "Export to Application"
+          },
+          "targetApplication": {
+            "type": "string",
+            "nullable": true,
+            "example": "Application"
+          }
+        },
+        "additionalProperties": false
+      },
+      "InteropTemplateValidationResult": {
+        "type": "object",
+        "properties": {
+          "isValid": {
+            "type": "boolean",
+            "example": true
+          },
+          "missingLabels": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true,
+            "example": [
+              "project",
+              "document"
+            ]
+          }
+        },
+        "additionalProperties": false
+      },
+      "IRecord": {
+        "type": "object",
+        "properties": {
+          "values": {
+            "type": "object",
+            "additionalProperties": { },
+            "nullable": true,
+            "readOnly": true
+          },
+          "keys": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true,
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "LabelFilter": {
+        "required": [
+          "title"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32",
+            "example": 0
+          },
+          "sysInserted": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true,
+            "example": "2021-08-17T11:16:39.684Z"
+          },
+          "sysUpdated": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true,
+            "example": "2021-08-17T11:16:39.684Z"
+          },
+          "sysInsertedUser": {
+            "type": "string",
+            "nullable": true,
+            "example": "User"
+          },
+          "sysUpdatedUser": {
+            "type": "string",
+            "nullable": true,
+            "example": "User"
+          },
+          "title": {
+            "type": "string",
+            "example": "My Filter"
+          },
+          "labels": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "LabelsRequest": {
+        "required": [
+          "labels"
+        ],
+        "type": "object",
+        "properties": {
+          "labels": {
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "example": [
+              "project",
+              "document"
+            ]
+          }
+        },
+        "additionalProperties": false
+      },
+      "LicensedModule": {
+        "type": "object",
+        "properties": {
+          "moduleSupportType": {
+            "type": "string",
+            "nullable": true,
+            "example": "Production"
+          },
+          "moduleKey": {
+            "type": "string",
+            "nullable": true,
+            "example": "module-key"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Metadata": {
+        "type": "object",
+        "properties": {
+          "artifacts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Artifact"
+            },
+            "nullable": true
+          },
+          "artifactsCount": {
+            "type": "integer",
+            "format": "int32",
+            "example": 0
+          },
+          "relatedNodes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/NavigationNode"
+            },
+            "nullable": true
+          },
+          "relatedNodesCount": {
+            "type": "integer",
+            "format": "int64",
+            "example": 0
+          },
+          "hasGeometry": {
+            "type": "boolean",
+            "example": true
+          },
+          "nodeIdsChildrenWithGeometry": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true,
+            "example": [
+              "\\project\\1",
+              "\\document\\2"
+            ]
+          },
+          "nodeIdsParents": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true,
+            "example": [
+              "\\project\\1",
+              "\\document\\2"
+            ]
+          },
+          "nodeIdsChildren": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true,
+            "example": [
+              "\\project\\1",
+              "\\document\\2"
+            ]
+          },
+          "isGeneric": {
+            "type": "boolean",
+            "example": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "MetadataConfig": {
+        "type": "object",
+        "properties": {
+          "includeAllMetadata": {
+            "type": "boolean",
+            "example": true
+          },
+          "includeArtifacts": {
+            "type": "boolean",
+            "example": false
+          },
+          "includeArtifactsCount": {
+            "type": "boolean",
+            "example": false
+          },
+          "includeRelatedNodes": {
+            "type": "boolean",
+            "example": false
+          },
+          "includeRelatedNodesCount": {
+            "type": "boolean",
+            "example": false
+          },
+          "includeHasGeometry": {
+            "type": "boolean",
+            "example": false
+          },
+          "includeNodeIdsChildrenWithGeometry": {
+            "type": "boolean",
+            "example": false
+          },
+          "includeNodeIdsParentChildren": {
+            "type": "boolean",
+            "example": false
+          }
+        },
+        "additionalProperties": false
+      },
+      "NavigationNode": {
+        "type": "object",
+        "properties": {
+          "nodeId": {
+            "type": "string",
+            "nullable": true,
+            "example": "\\project\\1"
+          },
+          "labels": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true,
+            "example": [
+              "project",
+              "document"
+            ]
+          },
+          "properties": {
+            "type": "object",
+            "additionalProperties": { },
+            "nullable": true,
+            "example": {
+              "year": "2021",
+              "budget": "42000"
+            }
+          }
+        },
+        "additionalProperties": false
+      },
+      "Node": {
+        "type": "object",
+        "properties": {
+          "nodeId": {
+            "type": "string",
+            "nullable": true,
+            "example": "\\project\\1"
+          },
+          "labels": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true,
+            "example": [
+              "project",
+              "document"
+            ]
+          },
+          "properties": {
+            "type": "object",
+            "additionalProperties": { },
+            "nullable": true,
+            "example": {
+              "year": "2021",
+              "budget": "42000"
+            }
+          }
+        },
+        "additionalProperties": false
+      },
+      "NodeIdsRequest": {
+        "required": [
+          "nodeIds"
+        ],
+        "type": "object",
+        "properties": {
+          "nodeIds": {
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "example": [
+              "\\project\\1",
+              "\\document\\2"
+            ]
+          }
+        },
+        "additionalProperties": false
+      },
+      "NodeSetting": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32",
+            "example": 0
+          },
+          "sysInserted": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true,
+            "example": "2021-08-17T11:16:39.684Z"
+          },
+          "sysUpdated": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true,
+            "example": "2021-08-17T11:16:39.684Z"
+          },
+          "sysInsertedUser": {
+            "type": "string",
+            "nullable": true,
+            "example": "User"
+          },
+          "sysUpdatedUser": {
+            "type": "string",
+            "nullable": true,
+            "example": "User"
+          },
+          "label": {
+            "type": "string",
+            "nullable": true,
+            "example": "project"
+          },
+          "color": {
+            "type": "string",
+            "nullable": true,
+            "example": "#000000"
+          },
+          "icon": {
+            "type": "string",
+            "nullable": true,
+            "example": "fas fa-user"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ProblemDetails": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "nullable": true
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "detail": {
+            "type": "string",
+            "nullable": true
+          },
+          "instance": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": { }
+      },
+      "PropertyConfiguration": {
+        "type": "object",
+        "properties": {
+          "property": {
+            "type": "string",
+            "nullable": true,
+            "example": "budget"
+          },
+          "valueType": {
+            "type": "string",
+            "nullable": true,
+            "example": "Numeric"
+          },
+          "hasAggregation": {
+            "type": "boolean",
+            "example": false
+          },
+          "isFilterable": {
+            "type": "boolean",
+            "example": true
+          },
+          "isVisual": {
+            "type": "boolean",
+            "example": true
+          },
+          "isMetadata": {
+            "type": "boolean",
+            "example": false
+          },
+          "discreteValues": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true,
+            "example": [
+              "one",
+              "two"
+            ]
+          }
+        },
+        "additionalProperties": false
+      },
+      "PropertyFilter": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32",
+            "example": 0
+          },
+          "sysInserted": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true,
+            "example": "2021-08-17T11:16:39.684Z"
+          },
+          "sysUpdated": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true,
+            "example": "2021-08-17T11:16:39.684Z"
+          },
+          "sysInsertedUser": {
+            "type": "string",
+            "nullable": true,
+            "example": "User"
+          },
+          "sysUpdatedUser": {
+            "type": "string",
+            "nullable": true,
+            "example": "User"
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "propertiesPerLabel": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PropertyGroup": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true,
+            "example": "General"
+          },
+          "order": {
+            "type": "integer",
+            "format": "int32",
+            "example": 1
+          },
+          "visible": {
+            "type": "boolean",
+            "example": true
+          },
+          "properties": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true,
+            "example": [
+              "year",
+              "budget"
+            ]
+          }
+        },
+        "additionalProperties": false
+      },
+      "RelatedNodesCount": {
+        "type": "object",
+        "properties": {
+          "count": {
+            "type": "integer",
+            "format": "int64",
+            "example": 0
+          },
+          "label": {
+            "type": "string",
+            "nullable": true,
+            "example": "project"
+          }
+        },
+        "additionalProperties": false
+      },
+      "RelatedNodesCountRequest": {
+        "required": [
+          "nodeIds"
+        ],
+        "type": "object",
+        "properties": {
+          "nodeIds": {
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "example": [
+              "\\project\\1",
+              "\\document\\2"
+            ]
+          },
+          "limit": {
+            "type": "integer",
+            "format": "int32",
+            "example": 1
+          },
+          "includeAllNodes": {
+            "type": "boolean",
+            "description": "If set to true, all nodes (not only related ones) are considered.",
+            "example": false
+          }
+        },
+        "additionalProperties": false
+      },
+      "RelatedNodesDistanceRequest": {
+        "required": [
+          "labels",
+          "nodeIds"
+        ],
+        "type": "object",
+        "properties": {
+          "nodeIds": {
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "example": [
+              "\\project\\1",
+              "\\document\\2"
+            ]
+          },
+          "limit": {
+            "type": "integer",
+            "format": "int32",
+            "example": 1
+          },
+          "labels": {
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "example": [
+              "project",
+              "document"
+            ]
+          }
+        },
+        "additionalProperties": false
+      },
+      "RelatedNodesRequest": {
+        "required": [
+          "nodeIds"
+        ],
+        "type": "object",
+        "properties": {
+          "nodeIds": {
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "example": [
+              "\\project\\1",
+              "\\document\\2"
+            ]
+          },
+          "limit": {
+            "type": "integer",
+            "format": "int32",
+            "example": 1
+          },
+          "labels": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true,
+            "example": [
+              "project",
+              "document"
+            ]
+          }
+        },
+        "additionalProperties": false
+      },
+      "RunCypherQuery": {
+        "required": [
+          "cypherQuery"
+        ],
+        "type": "object",
+        "properties": {
+          "cypherQuery": {
+            "type": "string",
+            "example": "match (n:project) return n limit 25"
+          },
+          "parameters": {
+            "type": "object",
+            "additionalProperties": { },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Sandbox": {
+        "required": [
+          "sandboxName"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32",
+            "example": 0
+          },
+          "sysInserted": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true,
+            "example": "2021-08-17T11:16:39.684Z"
+          },
+          "sysUpdated": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true,
+            "example": "2021-08-17T11:16:39.684Z"
+          },
+          "sysInsertedUser": {
+            "type": "string",
+            "nullable": true,
+            "example": "User"
+          },
+          "sysUpdatedUser": {
+            "type": "string",
+            "nullable": true,
+            "example": "User"
+          },
+          "sandboxName": {
+            "type": "string",
+            "example": "Sandbox"
+          },
+          "sandboxState": {
+            "type": "string",
+            "nullable": true,
+            "example": "State example"
+          },
+          "description": {
+            "type": "string",
+            "nullable": true,
+            "example": "Description of sandbox"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Scope": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "nullable": true,
+            "example": "Project Scope"
+          },
+          "nodeId": {
+            "type": "string",
+            "nullable": true,
+            "example": "\\project\\1"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SearchConfiguration": {
+        "type": "object",
+        "properties": {
+          "allOfTheseWords": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true,
+            "example": [
+              "house",
+              "door"
+            ]
+          },
+          "exactPhrase": {
+            "type": "string",
+            "nullable": true,
+            "example": "blue door"
+          },
+          "anyOfTheseWords": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true,
+            "example": [
+              "house",
+              "door"
+            ]
+          },
+          "noneOfTheseWords": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true,
+            "example": [
+              "house",
+              "door"
+            ]
+          },
+          "includedNodeIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true,
+            "example": [
+              "\\project\\1",
+              "\\document\\2"
+            ]
+          },
+          "selectedLabels": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true,
+            "example": [
+              "project",
+              "document"
+            ]
+          }
+        },
+        "additionalProperties": false
+      },
+      "Session": {
+        "required": [
+          "sessionName"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32",
+            "example": 0
+          },
+          "sysInserted": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true,
+            "example": "2021-08-17T11:16:39.684Z"
+          },
+          "sysUpdated": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true,
+            "example": "2021-08-17T11:16:39.684Z"
+          },
+          "sysInsertedUser": {
+            "type": "string",
+            "nullable": true,
+            "example": "User"
+          },
+          "sysUpdatedUser": {
+            "type": "string",
+            "nullable": true,
+            "example": "User"
+          },
+          "sessionName": {
+            "type": "string",
+            "example": "Session"
+          },
+          "sessionState": {
+            "type": "string",
+            "nullable": true,
+            "example": "State example"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ShortestPath": {
+        "type": "object",
+        "properties": {
+          "nodes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/NavigationNode"
+            },
+            "nullable": true
+          },
+          "edges": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Edge"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Theme": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32",
+            "example": 0
+          },
+          "sysInserted": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true,
+            "example": "2021-08-17T11:16:39.684Z"
+          },
+          "sysUpdated": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true,
+            "example": "2021-08-17T11:16:39.684Z"
+          },
+          "sysInsertedUser": {
+            "type": "string",
+            "nullable": true,
+            "example": "User"
+          },
+          "sysUpdatedUser": {
+            "type": "string",
+            "nullable": true,
+            "example": "User"
+          },
+          "title": {
+            "type": "string",
+            "nullable": true,
+            "example": "Official theme"
+          },
+          "active": {
+            "type": "boolean",
+            "example": true
+          },
+          "configuration": {
+            "type": "string",
+            "nullable": true,
+            "example": "Theme configuration"
+          }
+        },
+        "additionalProperties": false
+      },
+      "TokenRequest": {
+        "required": [
+          "token"
+        ],
+        "type": "object",
+        "properties": {
+          "token": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ViewPoint": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32",
+            "example": 0
+          },
+          "sysInserted": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true,
+            "example": "2021-08-17T11:16:39.684Z"
+          },
+          "sysUpdated": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true,
+            "example": "2021-08-17T11:16:39.684Z"
+          },
+          "sysInsertedUser": {
+            "type": "string",
+            "nullable": true,
+            "example": "User"
+          },
+          "sysUpdatedUser": {
+            "type": "string",
+            "nullable": true,
+            "example": "User"
+          },
+          "title": {
+            "type": "string",
+            "nullable": true,
+            "example": "Project Viewpoint"
+          },
+          "description": {
+            "type": "string",
+            "nullable": true,
+            "example": "Returns all project related nodes"
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  }
+}
